@@ -1,5 +1,9 @@
+require('dotenv').config();
+const { errors } = require('celebrate');
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
 const NotFoundError = require('./errors/NotFoundError');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -11,12 +15,12 @@ const routeSignup = require('./routes/index');
 const routeSignin = require('./routes/index');
 
 const auth = require('./middlewares/auth');
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
-const limiter = require('./middlewares/rateLimiter');
+const limiter = require('./middlewares/limiter');
 
-const { errors } = require('celebrate');
 const error = require('./middlewares/error');
+
+const URL = 'mongodb://127.0.0.1:27017/mestodb';
+
 const { PORT = 3000 } = process.env;
 
 mongoose.set('strictQuery', true);
@@ -31,6 +35,13 @@ mongoose
   });
 
 const app = express();
+
+// Краш-тест сервера
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.use(helmet());
 app.use(auth);
@@ -53,55 +64,3 @@ app.use((err, req, res, next) => next(new NotFoundError('Страницы по �
 app.use(error);
 
 app.listen(PORT);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* const express = require('express');
-const mongoose = require('mongoose');
-
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
-
-const { PORT = 3000 } = process.env;
-const { ERROR_NOT_FOUND } = require('./utils/errors');
-const app = express();
-const router = require('./routes/index');
-
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-
-app.use((req, res, next) => {
-  req.user = {
-    _id: '64b7df40e8932539ef78d352',
-  };
-  next();
-});
-
-app.use(express.json());
-app.use(helmet());
-app.use('/', router);
-app.use('*', (req, res) => {
-  res.status(ERROR_NOT_FOUND).send({ message: 'Страница не найдена' });
-});
-
-app.listen(PORT, () => {
-  console.log('Сервер запущен!');
-});
- */

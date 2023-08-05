@@ -3,7 +3,6 @@ const { celebrate, Joi } = require('celebrate');
 const { URL_REGEX } = require('../utils/constants');
 const { createUser, login } = require('../controllers/users');
 
-
 router.post(
   '/signin',
   celebrate({

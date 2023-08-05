@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const doublingError = require('../errors/ConflictError'); //!//
+const DoublingError = require('../errors/DoublingError');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
@@ -37,7 +37,9 @@ module.exports.userById = (req, res, next) => {
 
 // Регистрация нового пользователя
 module.exports.createUser = (req, res, next) => {
-  const {email, password, name, about, avatar,} = req.body;
+  const {
+    email, password, name, about, avatar,
+  } = req.body;
 
   bcrypt
     .hash(password, 10)
@@ -62,7 +64,7 @@ module.exports.createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         next(
-          new doublingError(
+          new DoublingError(
             'Email адрес уже зарегистрирован',
           ),
         );
@@ -159,4 +161,4 @@ module.exports.login = (req, res, next) => {
       throw new UnauthorizedError('Неправильные почта или пароль');
     })
     .catch(next);
-}
+};

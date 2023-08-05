@@ -10,7 +10,7 @@ module.exports.dataCards = (_, res, next) => {
     .populate(['owner', 'likes'])
     .then((cards) => res.send({ data: cards }))
     .catch(next);
-}
+};
 
 // новая карточка
 module.exports.newCard = (req, res, next) => {
@@ -28,7 +28,7 @@ module.exports.newCard = (req, res, next) => {
         next(err);
       }
     });
-}
+};
 
 // удаление карточки
 module.exports.deleteCard = (req, res, next) => {
@@ -59,7 +59,7 @@ module.exports.deleteCard = (req, res, next) => {
       res.send({ data: deletedCard });
     })
     .catch(next);
-}
+};
 
 // ставим лайк
 module.exports.setLikeCard = (req, res, next) => {
@@ -93,7 +93,7 @@ module.exports.setLikeCard = (req, res, next) => {
         next(err);
       }
     });
-}
+};
 
 // убираем лайк
 module.exports.deleteLikeCard = (req, res, next) => {
@@ -127,4 +127,4 @@ module.exports.deleteLikeCard = (req, res, next) => {
         next(err);
       }
     });
-}
+};
