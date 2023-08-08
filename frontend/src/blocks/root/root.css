@@ -1,0 +1,12 @@
+.root {
+    /* max-width: 1280px; */
+    max-width: 100vw;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    text-rendering: optimizeLegibility;
+    background-color: #000;
+    color: #ffffff;
+    box-sizing: border-box;
+}

@@ -1,0 +1,8 @@
+.card__pic {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    cursor: pointer;
+    background-color: #262323;
+}
