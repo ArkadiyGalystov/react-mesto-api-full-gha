@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 
+IP-адрес 158.160.117.20
 
 Frontend https://ark.nomoreparties.co
 
