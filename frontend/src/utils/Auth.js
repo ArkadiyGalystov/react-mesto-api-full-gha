@@ -45,7 +45,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: "https://ark-bk.nomoreparties.co/",
+  baseUrl: "https://ark-bk.nomoreparties.co",
   //baseUrl: "",
   headers: {
     "Content-Type": "application/json",
