@@ -107,7 +107,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://ark-bk.nomoreparties.co/",
+  baseUrl: "https://ark-bk.nomoreparties.co",
   //baseUrl: "",
 })
 
